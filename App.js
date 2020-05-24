@@ -1,6 +1,9 @@
 /** @format */
 
-import * as React from "react";
+import React, { useState } from "react";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { Platform, StyleSheet, Text, View, Button, Alert } from "react-native";
 import {
   colors,
@@ -9,26 +12,26 @@ import {
   borderRadius,
   dimensions,
   btn
-} from "./components/Style";
+} from "./src/Style";
+import Signin from "./src/components/auth/Signin";
+import Signup from "./src/components/auth/Signup";
 
 export default function App(props) {
-  console.log(props, "hello");
+  const Stack = createStackNavigator();
+  const [x, setX] = useState(false);
   return (
-    <View style={styles.container}>
-      <View style={styles.boxWithShadow}>
-        <Text>hhe</Text>
-      </View>
-      <Text style={styles.btn}>Click to show btn</Text>
-      <Button
-        title="Click"
-        style={styles.btn}
-        color="blue"
-        accessibilityLabel="Learn more about this purple button"
-        // disabled={true}
-        onPress={() => Alert.alert("hello")}
-      />
-      <Text style={styles.text}>Find art mobiles</Text>
-    </View>
+    <NavigationContainer>
+      {x === !!false ? (
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Signin} />
+          <Stack.Screen name="Create Account" component={Signup} />
+        </Stack.Navigator>
+      ) : (
+        <View>
+          <Text>hello</Text>
+        </View>
+      )}
+    </NavigationContainer>
   );
 }
 
@@ -37,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.redDark
+    backgroundColor: colors.blueXspecial
     // backgroundColor: "red"
   },
   containerItems: {

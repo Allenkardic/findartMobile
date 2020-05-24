@@ -27,6 +27,7 @@ export const colors = {
 };
 
 export const padding = {
+  xxxsmall: 6,
   xxsmall: 12,
   xsmall: 24,
   small: 32,
@@ -37,6 +38,7 @@ export const padding = {
 };
 
 export const margin = {
+  xxxsmall: 6,
   xxsmall: 12,
   xsmall: 24,
   small: 32,
@@ -78,8 +80,6 @@ export const lineHeight = {
 };
 
 export const btn = {
-  cursor: "pointer",
-  border: "none",
   boxShadow: "0 4px hsla(0, 0%, 0.2)",
   borderRadius: 4,
   backgroundColor: "red"
