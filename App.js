@@ -1,9 +1,10 @@
 /** @format */
 
-import React, { useState } from "react";
-import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./src/redux/store";
 import { Platform, StyleSheet, Text, View, Button, Alert } from "react-native";
 import {
   colors,
@@ -13,25 +14,15 @@ import {
   dimensions,
   btn
 } from "./src/Style";
-import Signin from "./src/components/auth/Signin";
-import Signup from "./src/components/auth/Signup";
+import Main from "./src/navigations/Main";
 
-export default function App(props) {
-  const Stack = createStackNavigator();
-  const [x, setX] = useState(false);
+export default function App() {
   return (
-    <NavigationContainer>
-      {x === !!false ? (
-        <Stack.Navigator>
-          <Stack.Screen name="Login" component={Signin} />
-          <Stack.Screen name="Create Account" component={Signup} />
-        </Stack.Navigator>
-      ) : (
-        <View>
-          <Text>hello</Text>
-        </View>
-      )}
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Main />
+      </PersistGate>
+    </Provider>
   );
 }
 

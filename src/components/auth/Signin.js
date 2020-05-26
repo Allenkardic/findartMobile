@@ -1,6 +1,8 @@
 /** @format */
 
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { signinUser } from "../../redux/actions/authAction";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthLayout from "./AuthLayout";
@@ -12,7 +14,8 @@ import {
   View,
   Button,
   Alert,
-  Form
+  Form,
+  ActivityIndicator
 } from "react-native";
 import {
   colors,
@@ -32,8 +35,10 @@ function Signin(props) {
       email: emailValue,
       password: passwordValue
     };
+
+    console.log(props, "submited");
+    props.signinUser(user, props.navigation);
   };
-  console.log(props, "submited");
   const { navigation } = props;
   return (
     <AuthLayout
@@ -56,7 +61,9 @@ function Signin(props) {
         password={true}
       />
       <View style={styles.btn}>
-        <Button title="Submit" onPress={handleSubmit} />
+        <Button title="submit" onPress={handleSubmit} isloading={true}></Button>
+
+        <ActivityIndicator animating={true} size="large" color="#0000ff" />
       </View>
       <Text
         style={{ marginBottom: margin.xxsmall }}
@@ -87,5 +94,9 @@ const styles = StyleSheet.create({
     marginBottom: margin.small
   }
 });
-
-export default Signin;
+const mapStateToProps = (state) => {
+  return {
+    loginLoading: state.ui.ui_loading_login
+  };
+};
+export default connect(mapStateToProps, { signinUser })(Signin);

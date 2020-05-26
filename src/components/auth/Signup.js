@@ -45,6 +45,7 @@ function Signup(props) {
 
     console.log(user, "submited");
   };
+  const { navigation } = props;
   return (
     <AuthLayout title="Artwork market place" containerTitle="Register">
       <Text style={styles.inputBox}>E-mail</Text>
@@ -96,7 +97,7 @@ function Signup(props) {
       </View>
       <Text
         style={{ marginBottom: margin.xxsmall }}
-        onPress={() => navigation.navigate("Signup")}>
+        onPress={() => navigation.navigate("Login")}>
         have an account login!
       </Text>
     </AuthLayout>
