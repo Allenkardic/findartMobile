@@ -8,7 +8,8 @@ import {
 } from "../actions/type";
 
 const initialState = {
-  authenticated: false
+  authenticated: false,
+  loginMessage: {}
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +18,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         authenticated: true
+      };
+
+    case SET_AUTH_LOGIN_ERROR:
+      return {
+        ...state,
+        loginMessage: action.payload
       };
 
     default:

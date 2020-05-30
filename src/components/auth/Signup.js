@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthLayout from "./AuthLayout";
+import CustomButton from "../utilities/CustomButton";
 import {
   TextInput,
   Input,
@@ -93,7 +94,12 @@ function Signup(props) {
         password={true}
       />
       <View style={styles.btn}>
-        <Button title="Submit" onPress={handleSubmit} />
+        <CustomButton
+          isFetching={props.loginLoading}
+          title={"REGISTER"}
+          onPress={handleSubmit}
+        />
+        {/* <Button title="Submit" onPress={handleSubmit} /> */}
       </View>
       <Text
         style={{ marginBottom: margin.xxsmall }}

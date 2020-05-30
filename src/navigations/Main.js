@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Signin from "../components/auth/Signin";
 import Signup from "../components/auth/Signup";
+import Test from "../components/utilities/Test";
 import Artworks from "../components/artworks/Artworks";
 function Main(props) {
   const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ function Main(props) {
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Signin} />
           <Stack.Screen name="Create Account" component={Signup} />
+          <Stack.Screen name="test" component={Test} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator>
