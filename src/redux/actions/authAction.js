@@ -19,10 +19,11 @@ export const signinUser = (user, navigation) => (dispatch) => {
     .then((response) => {
       const userToken = response.data.data.tokenInfo.accessToken;
       AsyncStorage.setItem("token", userToken);
-      axios.defaults.headers.common.Authorization = userToken;
+      axios.defaults.headers.common["Authorization"] = userToken;
       dispatch({ type: SET_AUTHENTICATED });
       dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: false });
-      navigation.push("artworks");
+      console.log(navigation);
+      // navigation.navigate("artworks");
     })
     .catch((error) => {
       dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: false });

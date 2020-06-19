@@ -36,10 +36,10 @@ function Signin(props) {
   const [passwordValue, setPasswordValue] = useState("");
   const [checkToast, setCheckToast] = useState(true);
 
-  useEffect(() => {
-    let message = props.signinMessage;
-    toastRef.current.show(message, 2000);
-  }, [checkToast]);
+  // useEffect(() => {
+  //   let message = props.signinMessage;
+  //   toastRef.current.show(message, 2000);
+  // }, [checkToast]);
 
   const handleSubmit = () => {
     const user = {
@@ -49,6 +49,7 @@ function Signin(props) {
     setCheckToast(!checkToast);
     props.signinUser(user, props.navigation);
   };
+
   const { navigation } = props;
   return (
     <AuthLayout

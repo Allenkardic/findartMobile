@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   authenticated: false,
-  loginMessage: {}
+  loginMessage: ""
 };
 
 export default function(state = initialState, action) {

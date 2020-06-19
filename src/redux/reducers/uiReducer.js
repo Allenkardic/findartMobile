@@ -2,12 +2,13 @@
 import {
   UI_LOADING_LOGIN_BUTTON,
   UI_LOADING_REGISTER_BUTTON,
-  UI_LOADING_LOGOUT_BUTTON
+  UI_LOADING_LOGOUT_BUTTON,
+  UI_LOADING_ARTWORK
 } from "../actions/type";
 
 const initialState = {
-  ui_loading_login: false
-  //   isFetching_artwork: false,
+  ui_loading_login: false,
+  isFetching_artwork: false
   //   isFetching_artworks: false,
   //   isFetching_artworkBid_button: false,
   //   isFetching_userprofile: false,
@@ -25,6 +26,11 @@ export default function(state = initialState, action) {
         ui_loading_login: action.payload
       };
 
+    case UI_LOADING_ARTWORK:
+      return {
+        ...state,
+        isFetching_artwork: action.payload
+      };
     default:
       return state;
   }

@@ -1,5 +1,8 @@
 /** @format */
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { AsyncStorage } from "react-native";
+import { connect } from "react-redux";
+import { getArtworks } from "../../redux/actions/artworkAction";
 import ArtworkCard from "../utilities/ArtworkCard";
 import {
   TextInput,
@@ -9,20 +12,43 @@ import {
   View,
   Button,
   Alert,
-  Form
+  Form,
+  ScrollView
 } from "react-native";
 import TopTitle from "../utilities/TopTitle";
-import IMG from "../../images/img1.png";
+// import IMG from "../../images/img1.png";
 
-export default function Artworks() {
+function Artworks(props) {
+  useEffect(() => {
+    // console.log("here is artprops", props.getArtworks());
+    props.getArtworks();
+  }, []);
+
+  const clearAsyncStorage = async () => {
+    AsyncStorage.clear();
+    console.log("storage");
+  };
+
+  console.log(props.artworks, "here it is");
   return (
-    <View>
-      <ArtworkCard
-        pageTitle="pageTitle"
-        artworkName="ArtworkName"
-        artworkDescription="ArtworkDescription"
-        imgSource={{ uri: "https://i.imgur.com/TkIrScD.png" }}
-      />
-    </View>
+    <ScrollView>
+      <Text>khsbdh</Text>
+      {props.artworks.map((artwork, i) => (
+        <ArtworkCard
+          key={i}
+          pageTitle="pageTitle"
+          artworkName={artwork.name}
+          artworkDescription={artwork.description}
+          imgSource={{ uri: artwork.imageUrl }}
+        />
+      ))}
+      <Button title="clear storage" onPress={clearAsyncStorage} />
+    </ScrollView>
   );
 }
+
+const mapStateToProps = (state) => ({
+  artworks: state.artwork.artworks,
+  isFetching: state.ui.isFetching_artworks
+});
+export default connect(mapStateToProps, { getArtworks })(Artworks);

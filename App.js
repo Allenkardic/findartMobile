@@ -1,6 +1,10 @@
 /** @format */
 
 import React from "react";
+if (__DEV__) {
+  import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
+}
+import Reactotron from "reactotron-react-native";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
