@@ -1,15 +1,12 @@
 /** @format */
 
-import React from "react";
-if (__DEV__) {
-  import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
-}
-import Reactotron from "reactotron-react-native";
+import React from 'react';
+import Reactotron from 'reactotron-react-native';
 
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./src/redux/store";
-import { Platform, StyleSheet, Text, View, Button, Alert } from "react-native";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './src/redux/store';
+import { Platform, StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {
   colors,
   fontSize,
@@ -17,8 +14,8 @@ import {
   borderRadius,
   dimensions,
   btn
-} from "./src/Style";
-import Main from "./src/navigations/Main";
+} from './src/Style';
+import Main from './src/navigations/Main';
 
 export default function App() {
   return (
@@ -33,18 +30,18 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: colors.blueXspecial
     // backgroundColor: "red"
   },
   containerItems: {
     // flex: 1,
     borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "blue",
-    justifyContent: "center",
-    alignItems: "center",
+    borderStyle: 'solid',
+    borderColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: padding.small,
     borderRadius: borderRadius.large
     // backgroundColor: "yellow"
@@ -59,20 +56,20 @@ const styles = StyleSheet.create({
     // border: "none",
     // boxShadow: "0 4px hsla(0, 0%, 0.2)",
     borderRadius: 4,
-    backgroundColor: "red",
+    backgroundColor: 'red',
     width: 200,
     // width: dimensions.fullWidth,
     // height: dimensions.fullHeight,
-    textAlign: "center",
-    color: "blue"
+    textAlign: 'center',
+    color: 'blue'
   },
   boxWithShadow: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
-    backgroundColor: "blue",
+    backgroundColor: 'blue',
     padding: padding.small
   }
 });

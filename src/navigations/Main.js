@@ -1,58 +1,58 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import "react-native-gesture-handler";
+import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import 'react-native-gesture-handler';
 import {
   NavigationContainer,
   DefaultTheme as navigatorDefaultTheme,
   DarkTheme as navigatorDarkTheme,
   useTheme
-} from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItem
-} from "@react-navigation/drawer";
+} from '@react-navigation/drawer';
 import {
   DefaultTheme as paperDefaultTheme,
   DarkTheme as paperDarkTheme,
   Provider as PaperProvider
-} from "react-native-paper";
-import Check from "../components/utilities/Check";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Signin from "../components/auth/Signin";
-import Signup from "../components/auth/Signup";
-import Test from "../components/utilities/Test";
-import Artworks from "../components/artworks/Artworks";
-import ArtworkDetails from "../components/artworks/ArtworkDetails";
-import Userprofile from "../components/profile/Userprofile";
-import Updateprofile from "../components/profile/Updateprofile";
-import Myartworks from "../components/artworks/Myartworks";
-import Addmyartwork from "../components/artworks/Addmyartwork";
+} from 'react-native-paper';
+import Check from '../components/utilities/Check';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import SigninScreen from '../screens/auth/SigninScreen';
+import SignupScreen from '../screens/auth/SignupScreen';
+import Test from '../components/utilities/Test';
+import ArtworksScreen from '../screens/artworks/ArtworksScreen';
+import ArtworkDetailScreen from '../screens/artworks/ArtworkDetailScreen';
+import UserprofileScreen from '../screens/profile/UserprofileScreen';
+import UpdateprofileScreen from '../screens/profile/UpdateprofileScreen';
+import MyartworksScreen from '../screens/artworks/MyartworksScreen';
+import AddmyartworkScreen from '../screens/artworks/AddmyartworkScreen';
 function Main(props) {
   const Stack = createStackNavigator();
   const Drawer = createDrawerNavigator();
   const artworkHeader = () => (
     <Stack.Navigator>
-      <Stack.Screen name="artworks" component={Artworks} />
+      <Stack.Screen name="artworks" component={ArtworksScreens} />
       <Stack.Screen name="artworkDetails" component={ArtworkDetails} />
     </Stack.Navigator>
   );
 
   const userProfileHeader = () => (
     <Stack.Navigator>
-      <Stack.Screen name="profile" component={Userprofile} />
-      <Stack.Screen name="update profile" component={Updateprofile} />
+      <Stack.Screen name="profile" component={UserprofileScreen} />
+      <Stack.Screen name="update profile" component={UpdateprofileScreen} />
     </Stack.Navigator>
   );
 
   const myArtworkHeader = () => (
     <Stack.Navigator>
-      <Stack.Screen name="myartworks" component={Myartworks} />
-      <Stack.Screen name="addmyartwork" component={Addmyartwork} />
+      <Stack.Screen name="myartworks" component={MyartworksScreen} />
+      <Stack.Screen name="addmyartwork" component={AddmyartworkScreen} />
     </Stack.Navigator>
   );
 
@@ -80,19 +80,19 @@ function Main(props) {
     colors: {
       ...navigatorDarkTheme.colors,
       ...paperDarkTheme.colors,
-      greyDark: "#323A43",
-      greyNormal: "#7A8691",
-      greySpecial: "#2F4F4F",
-      greyLight: "rgb(193, 196, 206)",
-      greyBackground: "rgb(232, 233, 238)",
-      blueDark: "#141e79f5",
-      blueBackground: "#91a5e5f5",
-      blueXspecial: "#48535ef5",
-      blueSpecial: "#020c13f5",
-      blueLight: "rgb(171, 171, 204)",
-      blueLite: "rgb(188, 188, 228)",
-      whiteLight: "rgb(255, 255, 255)",
-      whiteDark: "rgb(245, 245, 245)"
+      greyDark: '#323A43',
+      greyNormal: '#7A8691',
+      greySpecial: '#2F4F4F',
+      greyLight: 'rgb(193, 196, 206)',
+      greyBackground: 'rgb(232, 233, 238)',
+      blueDark: '#141e79f5',
+      blueBackground: '#91a5e5f5',
+      blueXspecial: '#48535ef5',
+      blueSpecial: '#020c13f5',
+      blueLight: 'rgb(171, 171, 204)',
+      blueLite: 'rgb(188, 188, 228)',
+      whiteLight: 'rgb(255, 255, 255)',
+      whiteDark: 'rgb(245, 245, 245)'
     }
   };
 
@@ -103,19 +103,19 @@ function Main(props) {
       ...navigatorDefaultTheme.colors,
       ...paperDefaultTheme.colors,
       // background: "rgb(193, 196, 206)",
-      greyDark: "#323A43",
-      greyNormal: "#7A8691",
-      greySpecial: "#2F4F4F",
-      greyLight: "rgb(193, 196, 206)",
-      greyBackground: "rgb(232, 233, 238)",
-      blueDark: "#141e79f5",
-      blueBackground: "#91a5e5f5",
-      blueXspecial: "#48535ef5",
-      blueSpecial: "#020c13f5",
-      blueLight: "rgb(171, 171, 204)",
-      blueLite: "rgb(188, 188, 228)",
-      whiteLight: "rgb(255, 255, 255)",
-      whiteDark: "rgb(245, 245, 245)"
+      greyDark: '#323A43',
+      greyNormal: '#7A8691',
+      greySpecial: '#2F4F4F',
+      greyLight: 'rgb(193, 196, 206)',
+      greyBackground: 'rgb(232, 233, 238)',
+      blueDark: '#141e79f5',
+      blueBackground: '#91a5e5f5',
+      blueXspecial: '#48535ef5',
+      blueSpecial: '#020c13f5',
+      blueLight: 'rgb(171, 171, 204)',
+      blueLite: 'rgb(188, 188, 228)',
+      whiteLight: 'rgb(255, 255, 255)',
+      whiteDark: 'rgb(245, 245, 245)'
     }
   };
 
@@ -124,8 +124,8 @@ function Main(props) {
       <NavigationContainer theme={MyTheme}>
         {props.isAuthenticated === false ? (
           <Stack.Navigator>
-            <Stack.Screen name="Login" component={Signin} />
-            <Stack.Screen name="Create Account" component={Signup} />
+            <Stack.Screen name="Login" component={SigninScreen} />
+            <Stack.Screen name="Create Account" component={SignupScreen} />
             <Stack.Screen name="test" component={Test} />
           </Stack.Navigator>
         ) : (
