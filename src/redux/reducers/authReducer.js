@@ -5,11 +5,11 @@ import {
   SET_UNAUTHENTICATED,
   SET_AUTH_LOGIN_ERROR,
   SET_AUTH_REGISTER_ERROR
-} from "../actions/type";
+} from '../actions/type';
 
 const initialState = {
   authenticated: false,
-  loginMessage: ""
+  loginMessage: ''
 };
 
 export default function(state = initialState, action) {
@@ -24,6 +24,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loginMessage: action.payload
+      };
+    case SET_UNAUTHENTICATED:
+      return {
+        ...state,
+        authenticated: false
       };
 
     default:

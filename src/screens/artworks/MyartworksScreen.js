@@ -10,7 +10,7 @@ export default function Myartworks(props) {
         title="move"
         onPress={() => props.navigation.navigate('addmyartwork')}
       />
-      <Text>here is my artwork</Text>
+      <Text>here is my artwordhngk etttttttttttt</Text>
     </View>
   );
 }

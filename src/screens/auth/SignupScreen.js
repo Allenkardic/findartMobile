@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthLayout from '../../components/auth/AuthLayout';
-import CustomButton from '../utilities/CustomButton';
+import CustomButton from '../../components/utilities/CustomButton';
 import {
   TextInput,
   Input,

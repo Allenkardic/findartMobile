@@ -1,6 +1,6 @@
 /** @format */
-import axios from "axios";
-import { AsyncStorage } from "react-native";
+import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
 import {
   SET_AUTHENTICATED,
@@ -10,16 +10,16 @@ import {
   UI_LOADING_LOGIN_BUTTON,
   UI_LOADING_REGISTER_BUTTON,
   UI_LOADING_LOGOUT_BUTTON
-} from "./type";
+} from './type';
 
 export const signinUser = (user, navigation) => (dispatch) => {
   dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: true });
   axios
-    .post("https://findartt.herokuapp.com/api/v1/auth/login", user)
+    .post('https://findartt.herokuapp.com/api/v1/auth/login', user)
     .then((response) => {
       const userToken = response.data.data.tokenInfo.accessToken;
-      AsyncStorage.setItem("token", userToken);
-      axios.defaults.headers.common["Authorization"] = userToken;
+      AsyncStorage.setItem('token', userToken);
+      axios.defaults.headers.common['Authorization'] = userToken;
       dispatch({ type: SET_AUTHENTICATED });
       dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: false });
       console.log(navigation);
@@ -90,29 +90,21 @@ export const signinUser = (user, navigation) => (dispatch) => {
 //     });
 // };
 
-// export const logout = () => (dispatch) => {
-//   dispatch({ type: UI_LOADING_NAV, payload: true });
-//   axios
-//     .post("https://findartt.herokuapp.com/api/v1/auth/logout")
-//     .then((response) => {
-//       delete axios.defaults.headers.common["Authorization"];
-//       localStorage.removeItem("token");
-//       dispatch({
-//         type: SET_UNAUTHENTICATED
-//       });
-//       dispatch({ type: CLEAR_ERROR });
-//       dispatch({ type: UI_LOADING_NAV, payload: false });
-//       // history.push('/');
-//     })
-//     .catch((error) => {
-//       dispatch({ type: UI_LOADING_NAV, payload: false });
-//       notification.error({
-//         message: "Error",
-//         description: error.response.data.message,
-//         placement: "topRight",
-//         duration: 10,
-//         rtl: true
-//       });
-//       console.log(error);
-//     });
-// };
+export const logout = () => (dispatch) => {
+  dispatch({ type: UI_LOADING_LOGOUT_BUTTON, payload: true });
+  axios
+    .post('https://findartt.herokuapp.com/api/v1/auth/logout')
+    .then((response) => {
+      delete axios.defaults.headers.common['Authorization'];
+      AsyncStorage.removeItem('token');
+      dispatch({
+        type: SET_UNAUTHENTICATED
+      });
+      dispatch({ type: UI_LOADING_LOGOUT_BUTTON, payload: false });
+      // history.push('/');
+    })
+    .catch((error) => {
+      dispatch({ type: UI_LOADING_LOGOUT_BUTTON, payload: false });
+      console.log(error);
+    });
+};

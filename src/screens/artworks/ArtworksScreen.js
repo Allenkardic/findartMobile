@@ -15,21 +15,15 @@ import {
   Form,
   ScrollView
 } from 'react-native';
-import TopTitle from '../utilities/TopTitle';
 // import IMG from "../../images/img1.png";
 
-function Artworks(props) {
+function ArtworksScreen(props) {
   useEffect(() => {
     // console.log("here is artprops", props.getArtworks());
     props.getArtworks();
   }, []);
 
-  const clearAsyncStorage = async () => {
-    AsyncStorage.clear();
-    console.log('storage');
-  };
-
-  console.log(props.artworks, 'here it is');
+  console.log(props, 'here it is');
   return (
     <ScrollView>
       <Text>khsbdh</Text>
@@ -42,7 +36,6 @@ function Artworks(props) {
           imgSource={{ uri: artwork.imageUrl }}
         />
       ))}
-      <Button title="clear storage" onPress={clearAsyncStorage} />
     </ScrollView>
   );
 }
@@ -51,4 +44,4 @@ const mapStateToProps = (state) => ({
   artworks: state.artwork.artworks,
   isFetching: state.ui.isFetching_artworks
 });
-export default connect(mapStateToProps, { getArtworks })(Artworks);
+export default connect(mapStateToProps, { getArtworks })(ArtworksScreen);

@@ -5,7 +5,8 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "rndebugger-open --expo"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.10.3",
@@ -20,6 +21,8 @@
     "react": "^16.13.1",
     "react-dom": "~16.9.0",
     "react-native": "~0.61.5",
+    "react-native-debugger": "^1.1.0",
+    "react-native-debugger-open": "^0.3.24",
     "react-native-easy-toast": "^1.2.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-paper": "^3.10.1",
