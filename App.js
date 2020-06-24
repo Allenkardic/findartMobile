@@ -1,5 +1,8 @@
 /** @format */
 
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 import React from 'react';
 import Reactotron from 'reactotron-react-native';
 
@@ -18,6 +21,7 @@ import {
 import Main from './src/navigations/Main';
 
 export default function App() {
+  Reactotron.log('hello rendering world');
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

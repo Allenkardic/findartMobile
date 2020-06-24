@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
+import { AsyncStorage } from 'react-native';
 import { View, Text, Switch, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actions/authAction';
@@ -190,7 +191,7 @@ function Main(props) {
       whiteDark: 'rgb(245, 245, 245)'
     }
   };
-  console.log(isEnabled, 'is enabled');
+
   return (
     <PaperProvider theme={MyTheme}>
       <NavigationContainer theme={MyTheme}>
@@ -201,6 +202,7 @@ function Main(props) {
             <Stack.Screen name="test" component={Test} />
           </Stack.Navigator>
         ) : (
+          // token()
           <CustomDrawer />
           // <Drawer.Navigator drawerContent={(props) => <Custom {...props} />}>
           //   <Drawer.Screen

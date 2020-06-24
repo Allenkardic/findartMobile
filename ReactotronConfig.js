@@ -1,7 +1,7 @@
 /** @format */
 
-import Reactotron from "reactotron-react-native";
-import { AsyncStorage } from "react-native";
+import Reactotron from 'reactotron-react-native';
+import { AsyncStorage } from 'react-native';
 
 export default function ReactotronConfig() {
   Reactotron.setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either come from `react-native` or `@react-native-community/async-storage` depending on where you get it from

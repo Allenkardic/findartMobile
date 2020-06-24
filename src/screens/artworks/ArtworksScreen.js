@@ -1,6 +1,5 @@
 /** @format */
 import React, { useState, useEffect } from 'react';
-import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { getArtworks } from '../../redux/actions/artworkAction';
 import ArtworkCard from '../../components/artworks/ArtworkCard';
@@ -22,11 +21,10 @@ function ArtworksScreen(props) {
     // console.log("here is artprops", props.getArtworks());
     props.getArtworks();
   }, []);
-
-  console.log(props, 'here it is');
   return (
     <ScrollView>
       <Text>khsbdh</Text>
+      <Text>hlj,h</Text>
       {props.artworks.map((artwork, i) => (
         <ArtworkCard
           key={i}
