@@ -22,8 +22,8 @@ const token = async function token() {
 };
 
 export const getArtworks = () => (dispatch) => {
-  dispatch({ type: UI_LOADING_ARTWORKS, payload: true });
   token();
+  dispatch({ type: UI_LOADING_ARTWORKS, payload: true });
   axios
     .get('https://findartt.herokuapp.com/api/v1/art/find')
     .then((response) => {

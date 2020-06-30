@@ -5,16 +5,16 @@ import { connect } from 'react-redux';
 import { signinUser } from '../../redux/actions/authAction';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import CustomButton from '../../components/utilities/CustomButton';
+import { Btn } from '../../components/utilities/CustomButton';
 import AuthLayout from '../../components/auth/AuthLayout';
-import Toast, { DURATION } from 'react-native-easy-toast';
+// import Toast, { DURATION } from 'react-native-easy-toast';
+import { Toast } from '../../components/utilities/CustomToast';
 import {
   TextInput,
   Input,
   StyleSheet,
   Text,
   View,
-  Button,
   Alert,
   Form,
   ActivityIndicator,
@@ -34,12 +34,24 @@ function Signin(props) {
   const toastRef = useRef(null);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [checkToast, setCheckToast] = useState(true);
+  const [checkToast, setCheckToast] = useState(false);
+
+  const [text, setText] = React.useState('');
+
+  const onChangeText = (text) => setText(text);
 
   // useEffect(() => {
   //   let message = props.signinMessage;
   //   toastRef.current.show(message, 2000);
   // }, [checkToast]);
+
+  const handleToast = () => {
+    if (!!props.signinMessage.length > 5) {
+      setCheckToast(true);
+    } else {
+      setCheckToast(false);
+    }
+  };
 
   const handleSubmit = () => {
     const user = {
@@ -47,7 +59,19 @@ function Signin(props) {
       password: passwordValue
     };
     setCheckToast(!checkToast);
+    setEmailValue('');
+    setPasswordValue('');
     props.signinUser(user, props.navigation);
+  };
+
+  const emailError = () => {
+    if (emailValue.length > 1 && !emailValue.includes('@')) {
+      return (
+        <View>
+          <Text style={styles.invalidEmail}>Email must contain '@' !</Text>
+        </View>
+      );
+    }
   };
 
   const { navigation } = props;
@@ -55,13 +79,22 @@ function Signin(props) {
     <AuthLayout
       title="Artwork market place"
       containerTitle="Login to your account">
-      <Text style={styles.inputBox}>E-mail</Text>
+      <Toast
+        backgroundStyle={{ backgroundColor: 'red', color: 'blue' }}
+        visible={true}
+        onDismiss={() => setCheckToast(false)}
+        textStyle={{ color: 'yellow' }}
+        toastText="hello"
+        duration={7000}
+      />
+      <Text style={styles.inputBox}>E-mail </Text>
       <TextInput
         style={styles.inputText}
         onChangeText={(text) => setEmailValue(text)}
         value={emailValue}
         placeholder="Enter E-mail"
       />
+      {emailError()}
       <Text style={styles.inputBox}>Password</Text>
       <TextInput
         style={styles.inputText}
@@ -71,11 +104,16 @@ function Signin(props) {
         secureTextEntry={true}
         password={true}
       />
+
       <View style={styles.btn}>
-        <CustomButton
+        {/* <Btn /> */}
+        <Btn
+          // backgroundStyle={styles.c}
+          // textStyle={styles.c}
           isFetching={props.loginLoading}
-          title={'LOGIN'}
+          disabled={props.loginLoading}
           onPress={handleSubmit}
+          title="LOGIN"
         />
       </View>
       <Text
@@ -83,21 +121,30 @@ function Signin(props) {
         onPress={() => navigation.navigate('Create Account')}>
         don't have an account register now!
       </Text>
-      <Text onPress={() => navigation.navigate('test')}>test component</Text>
-      <Toast
+      <Text onPress={() => navigation.navigate('test')}>test componentff</Text>
+      {/* <Toast
         ref={toastRef}
         style={{ backgroundColor: 'red' }}
         position="top"
         positionValue={10}
         fadeInDuration={750}
         fadeOutDuration={1000}
-        // textStyle={{ color: "red" }}
-      />
+      /> */}
     </AuthLayout>
   );
 }
 
 const styles = StyleSheet.create({
+  c: {
+    color: '#323A43',
+    backgroundColor: '#323A43'
+  },
+  invalidEmail: {
+    color: 'red',
+    fontSize: fontSize.xxsmall,
+    marginTop: margin.xxxsmall
+  },
+
   inputBox: {
     marginTop: margin.small,
     marginBottom: margin.xxxsmall

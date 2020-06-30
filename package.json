@@ -38,7 +38,8 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "upgrade": "^1.1.0"
+    "upgrade": "^1.1.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

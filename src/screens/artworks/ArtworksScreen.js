@@ -14,6 +14,7 @@ import {
   Form,
   ScrollView
 } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 // import IMG from "../../images/img1.png";
 
 function ArtworksScreen(props) {
@@ -21,6 +22,10 @@ function ArtworksScreen(props) {
     // console.log("here is artprops", props.getArtworks());
     props.getArtworks();
   }, []);
+
+  const { MyTheme } = useTheme();
+  console.log(MyTheme, 'dd');
+  console.log(props, 'atttf');
   return (
     <ScrollView>
       <Text>khsbdh</Text>
