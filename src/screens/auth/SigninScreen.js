@@ -3,11 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { signinUser } from '../../redux/actions/authAction';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { Btn } from '../../components/utilities/CustomButton';
 import AuthLayout from '../../components/auth/AuthLayout';
-// import Toast, { DURATION } from 'react-native-easy-toast';
 import { Toast } from '../../components/utilities/CustomToast';
 import {
   TextInput,
@@ -34,34 +31,29 @@ function Signin(props) {
   const toastRef = useRef(null);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [checkToast, setCheckToast] = useState(false);
+  const [checkToast, setCheckToast] = useState(true);
 
   const [text, setText] = React.useState('');
 
   const onChangeText = (text) => setText(text);
 
-  // useEffect(() => {
-  //   let message = props.signinMessage;
-  //   toastRef.current.show(message, 2000);
-  // }, [checkToast]);
-
-  const handleToast = () => {
-    if (!!props.signinMessage.length > 5) {
-      setCheckToast(true);
-    } else {
-      setCheckToast(false);
+  const handleSubmit = async () => {
+    try {
+      if (emailValue.length > 0 && passwordValue.length > 0) {
+        const user = {
+          email: emailValue,
+          password: passwordValue
+        };
+        setCheckToast(true);
+        setEmailValue('');
+        setPasswordValue('');
+        props.signinUser(user, props.navigation);
+      } else {
+        Alert.alert('all fields are required');
+      }
+    } catch (error) {
+      Alert.alert(error);
     }
-  };
-
-  const handleSubmit = () => {
-    const user = {
-      email: emailValue,
-      password: passwordValue
-    };
-    setCheckToast(!checkToast);
-    setEmailValue('');
-    setPasswordValue('');
-    props.signinUser(user, props.navigation);
   };
 
   const emailError = () => {
@@ -75,19 +67,21 @@ function Signin(props) {
   };
 
   const { navigation } = props;
+  console.log(checkToast, 'toast');
+  let toastTrue = checkToast && props.loginToast;
   return (
     <AuthLayout
       title="Artwork market place"
       containerTitle="Login to your account">
       <Toast
-        backgroundStyle={{ backgroundColor: 'red', color: 'blue' }}
-        visible={true}
+        backgroundStyle={{ backgroundColor: 'red', top: 0 }}
+        visible={toastTrue}
         onDismiss={() => setCheckToast(false)}
         textStyle={{ color: 'yellow' }}
-        toastText="hello"
+        toastText={props.signinMessage}
         duration={7000}
       />
-      <Text style={styles.inputBox}>E-mail </Text>
+      <Text style={styles.inputBox}>E-mail</Text>
       <TextInput
         style={styles.inputText}
         onChangeText={(text) => setEmailValue(text)}
@@ -106,7 +100,6 @@ function Signin(props) {
       />
 
       <View style={styles.btn}>
-        {/* <Btn /> */}
         <Btn
           // backgroundStyle={styles.c}
           // textStyle={styles.c}
@@ -122,14 +115,6 @@ function Signin(props) {
         don't have an account register now!
       </Text>
       <Text onPress={() => navigation.navigate('test')}>test componentff</Text>
-      {/* <Toast
-        ref={toastRef}
-        style={{ backgroundColor: 'red' }}
-        position="top"
-        positionValue={10}
-        fadeInDuration={750}
-        fadeOutDuration={1000}
-      /> */}
     </AuthLayout>
   );
 }
@@ -167,7 +152,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     loginLoading: state.ui.ui_loading_login,
-    signinMessage: state.auth.loginMessage
+    signinMessage: state.auth.loginMessage,
+    loginToast: state.ui.authToast
   };
 };
 export default connect(mapStateToProps, { signinUser })(Signin);

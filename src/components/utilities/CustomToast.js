@@ -11,9 +11,10 @@ export function Toast({
   backgroundStyle,
   onDismiss,
   toastText,
-  textStyle
+  textStyle,
+  toastRef
 }) {
-  console.log(Snackbar.DURATION_MEDIUM, 'snack');
+  // console.log(Snackbar.DURATION_MEDIUM, 'snack');
   return (
     <View>
       <Snackbar
@@ -21,6 +22,7 @@ export function Toast({
         theme={theme}
         duration={duration}
         onDismiss={onDismiss}
+        ref={toastRef}
         style={backgroundStyle}>
         <Text style={textStyle}>{toastText}</Text>
       </Snackbar>

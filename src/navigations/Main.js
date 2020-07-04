@@ -202,20 +202,7 @@ function Main(props) {
             <Stack.Screen name="test" component={Test} />
           </Stack.Navigator>
         ) : (
-          // token()
           <CustomDrawer />
-          // <Drawer.Navigator drawerContent={(props) => <Custom {...props} />}>
-          //   <Drawer.Screen
-          //     name="artworks"
-          //     children={artworkHeader}
-          //     options={{
-          //       drawerIcon: () => <Icon name="rocket" size={20} color="#900" />
-          //     }}
-          //   />
-          //   <Drawer.Screen name="User profiles" children={userProfileHeader} />
-          //   <Drawer.Screen name="My artworks" children={myArtworkHeader} />
-          //   <Drawer.Screen name="check" component={Check} />
-          // </Drawer.Navigator>
         )}
       </NavigationContainer>
     </PaperProvider>

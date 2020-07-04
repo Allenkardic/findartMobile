@@ -9,11 +9,13 @@ import {
   SET_AUTH_REGISTER_ERROR,
   UI_LOADING_LOGIN_BUTTON,
   UI_LOADING_REGISTER_BUTTON,
-  UI_LOADING_LOGOUT_BUTTON
+  UI_LOADING_LOGOUT_BUTTON,
+  SHOW_AUTH_TOAST
 } from './type';
 
 export const signinUser = (user, navigation) => (dispatch) => {
   dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: true });
+  dispatch({ type: SHOW_AUTH_TOAST, payload: false });
   axios
     .post('https://findartt.herokuapp.com/api/v1/auth/login', user)
     .then((response) => {
@@ -27,68 +29,35 @@ export const signinUser = (user, navigation) => (dispatch) => {
     })
     .catch((error) => {
       dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: false });
-      console.log(error.response.data.message);
       dispatch({
         type: SET_AUTH_LOGIN_ERROR,
         payload: error.response.data.message
       });
+      dispatch({ type: SHOW_AUTH_TOAST, payload: true });
     });
 };
 
-// export const signinUser = (user, navigation) => (dispatch) => {
-//   dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: true });
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.post(
-//         "https://findartt.herokuapp.com/api/v1/auth/login",
-//         user
-//       );
-//       const userToken = response.data.data.tokenInfo.accessToken;
-//       AsyncStorage.setItem("token", userToken);
-//       axios.defaults.headers.common.Authorization = userToken;
-//       dispatch({ type: SET_AUTHENTICATED });
-//       dispatch({ type: UI_LOADING, payload: false });
-//       navigation.push("artworks");
-//     } catch (error) {
-//       dispatch({ type: UI_LOADING_LOGIN_BUTTON, payload: false });
-//       console.log(error.response.data.message);
-//       dispatch({
-//         type: SET_AUTH_LOGIN_ERROR,
-//         payload: error.response.data.message
-//       });
-//     }
-//   };
-// };
-
-// export const signupUser = (newUser, history) => (dispatch) => {
-//   dispatch({ type: UI_LOADING, payload: true });
-//   axios
-//     .post("https://findartt.herokuapp.com/api/v1/auth/signup", newUser)
-//     .then((response) => {
-//       const userToken = response.data.data.tokenInfo.accessToken;
-//       localStorage.setItem("token", userToken);
-//       axios.defaults.headers.common.Authorization = userToken;
-//       dispatch({ type: SET_AUTHENTICATED });
-//       dispatch({ type: CLEAR_ERROR });
-//       dispatch({ type: UI_LOADING, payload: false });
-//       history.push("/artworks");
-//     })
-//     .catch((error) => {
-//       dispatch({ type: UI_LOADING, payload: false });
-//       dispatch({
-//         type: SET_ERROR_SIGNUP,
-//         payload: error.response.data.message
-//       });
-//       notification.error({
-//         message: "Invalid details",
-//         description: error.response.data.message,
-//         placement: "topRight",
-//         duration: 10,
-//         rtl: true
-//       });
-//       console.log(error.response.data.message);
-//     });
-// };
+export const signupUser = (newUser, history) => (dispatch) => {
+  dispatch({ type: UI_LOADING_REGISTER_BUTTON, payload: true });
+  dispatch({ type: SHOW_AUTH_TOAST, payload: false });
+  axios
+    .post('https://findartt.herokuapp.com/api/v1/auth/signup', newUser)
+    .then((response) => {
+      const userToken = response.data.data.tokenInfo.accessToken;
+      localStorage.setItem('token', userToken);
+      axios.defaults.headers.common.Authorization = userToken;
+      dispatch({ type: SET_AUTHENTICATED });
+      dispatch({ type: UI_LOADING_REGISTER_BUTTON, payload: false });
+    })
+    .catch((error) => {
+      dispatch({ type: UI_LOADING_REGISTER_BUTTON, payload: false });
+      dispatch({
+        type: SET_AUTH_REGISTER_ERROR,
+        payload: error.response.data.message
+      });
+      dispatch({ type: SHOW_AUTH_TOAST, payload: true });
+    });
+};
 
 export const logout = () => (dispatch) => {
   dispatch({ type: UI_LOADING_LOGOUT_BUTTON, payload: true });
@@ -101,7 +70,6 @@ export const logout = () => (dispatch) => {
         type: SET_UNAUTHENTICATED
       });
       dispatch({ type: UI_LOADING_LOGOUT_BUTTON, payload: false });
-      // history.push('/');
     })
     .catch((error) => {
       dispatch({ type: UI_LOADING_LOGOUT_BUTTON, payload: false });

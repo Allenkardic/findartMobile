@@ -4,12 +4,14 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   SET_AUTH_LOGIN_ERROR,
-  SET_AUTH_REGISTER_ERROR
+  SET_AUTH_REGISTER_ERROR,
+  SHOW_AUTH_TOAST
 } from '../actions/type';
 
 const initialState = {
   authenticated: false,
-  loginMessage: ''
+  loginMessage: '',
+  signupMessage: ''
 };
 
 export default function(state = initialState, action) {
@@ -25,6 +27,13 @@ export default function(state = initialState, action) {
         ...state,
         loginMessage: action.payload
       };
+
+    case SET_AUTH_LOGIN_ERROR:
+      return {
+        ...state,
+        signupMessage: action.payload
+      };
+
     case SET_UNAUTHENTICATED:
       return {
         ...state,

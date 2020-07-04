@@ -1,10 +1,12 @@
 /** @format */
 
 import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { connect } from 'react-redux';
+import { signupUser } from '../../redux/actions/authAction';
 import AuthLayout from '../../components/auth/AuthLayout';
-import CustomButton from '../../components/utilities/CustomButton';
+import { Btn } from '../../components/utilities/CustomButton';
+import { Toast } from '../../components/utilities/CustomToast';
+
 import {
   TextInput,
   Input,
@@ -25,30 +27,56 @@ import {
   boxWithShadow,
   dimensions
 } from '../../Style';
-function Signup(props) {
+function SignupScreen(props) {
   const [emailValue, setEmailValue] = useState('');
   const [firstNameValue, setFirstNameValue] = useState('');
   const [lastNameValue, setLastNameValue] = useState('');
   const [phoneValue, setPhoneValue] = useState('');
   const [countryValue, setCountryValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [checkToast, setCheckToast] = useState(true);
 
-  const handleSubmit = () => {
-    const user = {
-      email: emailValue,
-      password: passwordValue,
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-      phone: phoneValue,
-      country: countryValue,
-      password: passwordValue
-    };
+  const handleSubmit = async () => {
+    try {
+      if (
+        emailValue.length > 0 &&
+        passwordValue.length > 0 &&
+        firstNameValue.length > 0 &&
+        lastNameValue.length > 0 &&
+        phoneValue.length > 0 &&
+        countryValue.length > 0
+      ) {
+        const newUser = {
+          email: emailValue,
+          password: passwordValue,
+          firstName: firstNameValue,
+          lastName: lastNameValue,
+          phone: phoneValue,
+          country: countryValue
+        };
+        props.signinUser(newUser);
+        setCheckToast(true);
 
-    console.log(user, 'submited');
+        console.log(user, 'submited');
+      } else {
+        Alert.alert('all fields are required');
+      }
+    } catch (error) {
+      Alert.alert(error);
+    }
   };
   const { navigation } = props;
+  let toastTrue = checkToast && props.loginToast;
   return (
     <AuthLayout title="Artwork market place" containerTitle="Register">
+      <Toast
+        backgroundStyle={{ backgroundColor: 'red', top: 0 }}
+        visible={toastTrue}
+        onDismiss={() => setCheckToast(false)}
+        textStyle={{ color: 'yellow' }}
+        toastText={props.signinMessage}
+        duration={7000}
+      />
       <Text style={styles.inputBox}>E-mail</Text>
       <TextInput
         style={styles.inputText}
@@ -94,12 +122,12 @@ function Signup(props) {
         password={true}
       />
       <View style={styles.btn}>
-        <CustomButton
-          isFetching={props.loginLoading}
-          title={'REGISTER'}
+        <Btn
+          isFetching={props.registerLoading}
+          disabled={props.registerLoading}
           onPress={handleSubmit}
+          title="REGISTER"
         />
-        {/* <Button title="Submit" onPress={handleSubmit} /> */}
       </View>
       <Text
         style={{ marginBottom: margin.xxsmall }}
@@ -131,4 +159,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Signup;
+const mapStateToProps = (state) => ({
+  registerLoading: state.ui.ui_loading_signup,
+  registerMessage: state.auth.signupMessage,
+  registerToast: state.ui.authToast
+});
+
+export default connect(mapStateToProps, { signupUser })(SignupScreen);
