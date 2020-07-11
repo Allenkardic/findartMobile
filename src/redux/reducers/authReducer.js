@@ -11,7 +11,7 @@ import {
 const initialState = {
   authenticated: false,
   loginMessage: '',
-  signupMessage: ''
+  registerMessage: ''
 };
 
 export default function(state = initialState, action) {
@@ -28,10 +28,10 @@ export default function(state = initialState, action) {
         loginMessage: action.payload
       };
 
-    case SET_AUTH_LOGIN_ERROR:
+    case SET_AUTH_REGISTER_ERROR:
       return {
         ...state,
-        signupMessage: action.payload
+        registerMessage: action.payload
       };
 
     case SET_UNAUTHENTICATED:

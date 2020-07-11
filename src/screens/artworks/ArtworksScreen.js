@@ -25,7 +25,8 @@ function ArtworksScreen(props) {
 
   const { MyTheme } = useTheme();
   console.log(MyTheme, 'dd');
-  console.log(props, 'atttf');
+
+  console.log(props.navigation, 'nav');
   return (
     <ScrollView>
       <Text>khsbdh</Text>
@@ -37,6 +38,7 @@ function ArtworksScreen(props) {
           artworkName={artwork.name}
           artworkDescription={artwork.description}
           imgSource={{ uri: artwork.imageUrl }}
+          // onPressImg={}
         />
       ))}
     </ScrollView>

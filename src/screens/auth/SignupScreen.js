@@ -54,10 +54,8 @@ function SignupScreen(props) {
           phone: phoneValue,
           country: countryValue
         };
-        props.signinUser(newUser);
         setCheckToast(true);
-
-        console.log(user, 'submited');
+        props.signupUser(newUser);
       } else {
         Alert.alert('all fields are required');
       }
@@ -65,8 +63,18 @@ function SignupScreen(props) {
       Alert.alert(error);
     }
   };
+
+  const emailError = () => {
+    if (emailValue.length > 1 && !emailValue.includes('@')) {
+      return (
+        <View>
+          <Text style={styles.invalidEmail}>Email must contain '@' !</Text>
+        </View>
+      );
+    }
+  };
   const { navigation } = props;
-  let toastTrue = checkToast && props.loginToast;
+  let toastTrue = checkToast && props.registerToast;
   return (
     <AuthLayout title="Artwork market place" containerTitle="Register">
       <Toast
@@ -74,7 +82,7 @@ function SignupScreen(props) {
         visible={toastTrue}
         onDismiss={() => setCheckToast(false)}
         textStyle={{ color: 'yellow' }}
-        toastText={props.signinMessage}
+        toastText={props.regMessage}
         duration={7000}
       />
       <Text style={styles.inputBox}>E-mail</Text>
@@ -84,6 +92,7 @@ function SignupScreen(props) {
         value={emailValue}
         placeholder="Enter E-mail"
       />
+      {emailError()}
       <Text style={styles.inputBox}>First name</Text>
       <TextInput
         style={styles.inputText}
@@ -144,6 +153,12 @@ const styles = StyleSheet.create({
     marginBottom: margin.xxxsmall
   },
 
+  invalidEmail: {
+    color: 'red',
+    fontSize: fontSize.xxsmall,
+    marginTop: margin.xxxsmall
+  },
+
   inputText: {
     borderWidth: 1,
     borderStyle: 'solid',
@@ -160,9 +175,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  registerLoading: state.ui.ui_loading_signup,
-  registerMessage: state.auth.signupMessage,
-  registerToast: state.ui.authToast
+  registerLoading: state.ui.ui_loading_register,
+  regMessage: state.auth.registerMessage,
+  registerToast: state.ui.authToast_register
 });
 
 export default connect(mapStateToProps, { signupUser })(SignupScreen);

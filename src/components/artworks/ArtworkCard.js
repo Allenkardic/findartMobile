@@ -20,7 +20,8 @@ export default function ArtworkCard({
   artworkName,
   artworkDescription,
   imgStyle,
-  imgSource
+  imgSource,
+  onPressImg
 }) {
   const myTheme = useTheme();
   console.log('theme', myTheme);
@@ -41,6 +42,7 @@ export default function ArtworkCard({
           style={styles.imgStyle}
           //   style={{ width: 200, height: 200 }}
           source={imgSource}
+          onPress={onPressImg}
         />
         <Text style={[{ color: colors.blueDark }, styles.nameText]}>
           {artworkName}

@@ -12,7 +12,7 @@ import {
 const token = async function token() {
   try {
     const userToken = await AsyncStorage.getItem('token');
-    if (userToken !== null) {
+    if (userToken.length > 2) {
       axios.defaults.headers.common['Authorization'] = userToken;
       console.log(userToken);
     }
@@ -20,7 +20,7 @@ const token = async function token() {
     console.log(error);
   }
 };
-
+console.log(token(), 'ff');
 export const getArtworks = () => (dispatch) => {
   token();
   dispatch({ type: UI_LOADING_ARTWORKS, payload: true });

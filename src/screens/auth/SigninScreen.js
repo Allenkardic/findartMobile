@@ -67,7 +67,6 @@ function Signin(props) {
   };
 
   const { navigation } = props;
-  console.log(checkToast, 'toast');
   let toastTrue = checkToast && props.loginToast;
   return (
     <AuthLayout
