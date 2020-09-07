@@ -12,6 +12,13 @@
     ],
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "org.reactjs.native.findartMobile"
+    },
+    "android": {
+      "package": "com.findartMobile"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
